@@ -1,13 +1,25 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
+import Login from './views/Login.vue';
+import firebase from 'firebase'
 
 Vue.use(Router);
 
-export default new Router({
+const router =  new Router({
   routes: [
     {
       path: '/',
+      name: 'login',
+      component: Login,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
+    },
+    {
+      path: '/home',
       name: 'home',
       component: Home,
     },
@@ -21,3 +33,21 @@ export default new Router({
     },
   ],
 });
+// 未認証の場合はログイン画面へ
+router.beforeResolve((to, from, next) => {
+  console.log(to)
+  if (to.path == '/') {
+    next()
+  } else {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log('認証中')
+        next()
+      } else {
+        console.log('未認証')
+        next({path: '/'})
+      }
+    })
+  }
+})
+export default router
