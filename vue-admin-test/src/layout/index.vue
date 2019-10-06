@@ -1,12 +1,15 @@
 <template>
   <div class="app-wrapper">
-    <el-container>
-      <el-header>Header</el-header>
+    <el-container style="height: 500px; border: 1px solid #eee">
+      <sidebar class="sidebar-container" />
+
       <el-container>
-       <sidebar class="sidebar-container" />
-       <el-main>
-         <router-view/>
-       </el-main>
+        <el-header style="text-align: right; font-size: 12px">
+          <span>Header</span>
+        </el-header>
+        <el-main>
+          <router-view/>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -26,4 +29,9 @@ export default class Layout extends Vue {
 </script>
 
 <style lang="scss" scoped>
+  .el-header {
+    background-color: #B3C0D1;
+    color: #333;
+    line-height: 60px;
+  }
 </style>

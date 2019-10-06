@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="sidebar">
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-aside width="200px">
         <el-col :span="24">
-          <el-menu default-active="1" class="el-menu-vertical-demo">
+          <el-menu :default-active="onRoutes" class="">
             <el-menu-item index="1">
               <router-link to="/user-list">UserList</router-link>
             </el-menu-item>
@@ -25,5 +25,11 @@ import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Sidebar extends Vue {
+  get onRoutes() {
+    return this.$route.path;
+  }
 }
 </script>
+
+<style lang="scss" scoped>
+</style>
